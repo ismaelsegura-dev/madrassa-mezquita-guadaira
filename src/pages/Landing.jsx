@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, PenTool, User, LogIn, Mail, Lock } from 'lucide-react'
-import { supabase } from '../lib/supabase'
+import { supabase, currentUrl } from '../lib/supabase'
 
 export const Landing = () => {
   const navigate = useNavigate()
@@ -48,8 +48,11 @@ export const Landing = () => {
         </p>
 
         {error && (
-          <div style={{ background: '#ffcccc', color: '#cc0000', padding: '10px', borderRadius: '5px', marginBottom: '1rem', textAlign: 'center' }}>
-            {error}
+          <div style={{ background: '#ffcccc', color: '#cc0000', padding: '10px', borderRadius: '5px', marginBottom: '1rem', textAlign: 'center', wordBreak: 'break-all' }}>
+            <strong>{error}</strong>
+            <div style={{ fontSize: '0.85rem', marginTop: '5px', opacity: 0.8 }}>
+              Diagnóstico: intentando conectar con URL: <code>{currentUrl}</code>
+            </div>
           </div>
         )}
 

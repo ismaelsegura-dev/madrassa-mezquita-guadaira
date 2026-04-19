@@ -19,6 +19,8 @@ try {
   safeInstance = createClient('https://dummy.supabase.co', 'dummy-key')
 }
 
+export const currentUrl = supabaseUrl;
 export const supabase = safeInstance
+
 
 
