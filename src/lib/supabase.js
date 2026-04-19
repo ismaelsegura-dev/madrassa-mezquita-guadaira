@@ -1,11 +1,24 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://dummy.supabase.co'
+let supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://dummy.supabase.co'
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'dummy-key'
 
-if (!import.meta.env.VITE_SUPABASE_URL || !import.meta.env.VITE_SUPABASE_ANON_KEY) {
-  console.error('ALERTA: Supabase URL o Anon Key faltan en Vercel. Verifica las Environment Variables.')
+try {
+  // Verificamos si la URL es construible, si el usuario puso "misitio.com" sin https:// fallará.
+  new URL(supabaseUrl)
+} catch (error) {
+  console.error("La VITE_SUPABASE_URL provista en Vercel no es una ruta válida. Se usará el dummy.")
+  supabaseUrl = 'https://dummy.supabase.co'
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+let safeInstance;
+try {
+  safeInstance = createClient(supabaseUrl, supabaseAnonKey)
+} catch (e) {
+  console.error("Fallo al crear cliente Supabase, usando dummy.")
+  safeInstance = createClient('https://dummy.supabase.co', 'dummy-key')
+}
+
+export const supabase = safeInstance
+
 
