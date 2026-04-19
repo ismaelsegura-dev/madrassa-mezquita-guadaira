@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Kalam:wght@300;400;700&display=swap');
+
+:root {
+  /* Scribble/Paper Palette */
+  --paper-bg: #fdfaf3;
+  --paper-texture: #f4efe1;
+  --ink-black: #2d2d2d;
+  --ink-blue: #1a365d;
+  --pencil-gray: #4a4a4a;
+  --highlight-yellow: rgba(255, 243, 128, 0.4);
+  --border-scribble: #3d3d3d;
+  
+  /* Fonts */
+  --font-main: 'Vollkorn', serif;
+  --font-scribble: 'Indie Flower', cursive;
+  --font-accent: 'Kalam', cursive;
+
+  background-color: var(--paper-bg);
+  color: var(--ink-black);
+  font-family: var(--font-main);
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* Paper Texture Simulation */
+  background-image: 
+    radial-gradient(var(--paper-texture) 1px, transparent 1px),
+    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px, 40px 40px;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Scribble Border Effect */
+.scribble-card {
+  background: white;
+  border: 2px solid var(--border-scribble);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 2rem;
+  box-shadow: 5px 5px 0px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+.scribble-button {
+  background: transparent;
+  border: 2px solid var(--border-scribble);
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-scribble);
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 100px 20px 100px 30px / 30px 100px 30px 100px;
+  transition: all 0.2s ease;
+  color: var(--ink-black);
+}
+
+.scribble-button:hover {
+  transform: rotate(-1deg) scale(1.05);
+  background: var(--highlight-yellow);
+}
+
+h1, h2, h3 {
+  font-family: var(--font-accent);
+  color: var(--ink-blue);
+  margin-top: 0;
+}
+
+.handwritten {
+  font-family: var(--font-scribble);
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.float-anim {
+  animation: float 4s ease-in-out infinite;
+}
+
